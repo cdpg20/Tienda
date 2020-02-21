@@ -1,0 +1,6 @@
+C:\Users\cesar\source\repos\Tienda\Tienda\obj\Debug\Tienda.csprojAssemblyReference.cache
+C:\Users\cesar\source\repos\Tienda\Tienda\bin\Debug\Tienda.exe.config
+C:\Users\cesar\source\repos\Tienda\Tienda\bin\Debug\Tienda.exe
+C:\Users\cesar\source\repos\Tienda\Tienda\bin\Debug\Tienda.pdb
+C:\Users\cesar\source\repos\Tienda\Tienda\obj\Debug\Tienda.exe
+C:\Users\cesar\source\repos\Tienda\Tienda\obj\Debug\Tienda.pdb
