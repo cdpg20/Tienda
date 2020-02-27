@@ -17,8 +17,7 @@ namespace Tienda
 
         private Dictionary<Product, int> inventoryOfProducts = new Dictionary<Product, int>();
 
-        Dictionary<string, int> ItemsList = new Dictionary<string, int>();
-        Dictionary<string, int> ProductList = new Dictionary<string, int>();
+        
         string product;
         int quantity;
         int price;
@@ -40,6 +39,24 @@ namespace Tienda
         {
         }
 
+
+        public Product GetProductByName(string name)
+        {
+            return inventoryOfProducts.Keys.First(p => p.Name.Equals(name, StringComparison.CurrentCultureIgnoreCase));
+        }
+
+        public int GetQuantity(Product product)
+        {
+            return inventoryOfProducts[product];
+        }
+
+        public int GetQuantity(string name)
+        {
+            Product product = GetProductByName(name);
+            return GetQuantity(product);
+
+        }
+
         public void AddProductToInventory(Product product, int quantity) 
         {
             inventoryOfProducts.Add(product, quantity);
@@ -47,35 +64,17 @@ namespace Tienda
 
         public void RemoveProductFromInventory(Product product, int quantity) 
         {
-            int currentNumberOfProducts;
-
-            var dictionaryContains = InventoryContainsProduct(product);
-
             if (InventoryContainsProduct(product))
             {
 
-                foreach (KeyValuePair<Product, int> productData in inventoryOfProducts)
+                if (inventoryOfProducts[product] > quantity)
                 {
-                    if (productData.Key.Equals(product))
-                    {
-                        productData.Value
-                    }
-                }
+                    inventoryOfProducts[product] = inventoryOfProducts[product] - quantity;
 
-                currentNumberOfProducts = inventoryOfProducts[product];
-
-                 // 20 > 5
-                if (currentNumberOfProducts > quantity)
-                {
-                    currentNumberOfProducts = currentNumberOfProducts - quantity;
-                    // voy a registrar los cambios en el diccionario
-                    // esto es el Valor 
-                    inventoryOfProducts[product] = currentNumberOfProducts;
                 }
-                else 
+                else
                 {
-                    currentNumberOfProducts = currentNumberOfProducts - currentNumberOfProducts;
-                    inventoryOfProducts[product] = currentNumberOfProducts;
+                    Console.WriteLine($"Cannot decrease the quantity of product={product.Name}, the Current Quantity of product={product.Name} is={inventoryOfProducts[product]}");
                 }
             }
         }
@@ -95,35 +94,32 @@ namespace Tienda
             return existsProduct;
         }
 
-        public void AddItem(string Product, int Quantity)
+        public void AddItem(Product product, int Quantity)
         {
-            ItemsList.Add(Product, Quantity);
+            inventoryOfProducts.Add(product, Quantity);
         }
 
-        public void AddProduct(string Product, int Price)
+        public void AddProduct(Product product, int Price)
         {
-            ProductList.Add(Product, Price);
+            inventoryOfProducts.Add(product, Price);
         }
 
         public void DeleteItem(string Product)
         {
-            ItemsList.Remove(Product);
+            inventoryOfProducts.Remove(inventoryOfProducts.Keys.First(p => p.Name.Equals(product)));
         }
 
         public void PrintItem()
         {
-            foreach (KeyValuePair<string, int> pair in ItemsList)
-                Console.WriteLine("The item is: " + pair.Key + "Your quantity is: " + pair.Value);
+            foreach (KeyValuePair<Product, int> pair in inventoryOfProducts)
+                Console.WriteLine("The item is: " + pair.Key.Name + "Your quantity is: " + pair.Value);
         }
 
-        public void DeleteAllItems()
-        {
-            ItemsList.Clear();
-        }
+        
 
         public void DeleteAllProducts()
         {
-            ProductList.Clear();
+            inventoryOfProducts.Clear();
         }
     }
 

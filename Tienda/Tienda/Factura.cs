@@ -8,11 +8,13 @@ namespace Tienda
 {
     public class Factura
     {
-        Dictionary<Product, int> ProductList;
-        Client client;
+        private Dictionary<Product, int> ProductList;
+        private Client client;
 
         public Factura(Dictionary<Product, int> productList, Client client) 
-        { 
+        {
+            ProductList = productList;
+            this.client = client;
         }
 
     }
